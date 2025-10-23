@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investor Report</title>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        :root {
+            --primary-color: #006838;
+            --secondary-color: #00884A;
+            --accent-color: #E8F5E9;
+            --text-color: #333333;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+            max-height: 80px;
+            margin: 10px 0;
+            display: block;
+        }
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #006838;
+            background-color: #E8F5E9 !important;
+            padding: 20px;
+            border-radius: 8px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .header-text {
+            flex-grow: 1;
+            text-align: center;
+            width: 100%;
+        }
+        h1 {
+            color: #006838;
+            margin: 0;
+            font-size: 28px;
+            text-align: center;
+            padding: 0;
+        }
+        h2 {
+            color: #006838;
+            font-size: 20px;
+            margin-top: 30px;
+            border-bottom: 1px solid #00884A;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background-color: #E8F5E9 !important;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #006838;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: none;
+        }
+        th, td {
+            border: 1px solid #006838;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #E8F5E9 !important;
+            color: #006838;
+            font-weight: bold;
+            border-bottom: 2px solid #006838;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        td {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: white;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #333333;
+            font-size: 14px;
+            border-top: 1px solid #00884A;
+            background-color: #E8F5E9 !important;
+            padding: 20px;
+            border-radius: 8px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+            .header, .info-box, .footer {
+                background-color: #E8F5E9 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            th {
+                background-color: #E8F5E9 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="file:///C:/Users/HP/OneDrive/Documents/OneDrive/Desktop/IVYCAP/Investor report/report_template/logo-removebg-preview.png" alt="IvyEdge Logo" class="logo">
+
+    <div class="header">
+        <div class="header-text" style="text-align: center; width: 100%;">
+            <h1 style="text-align: center;">Investor Report</h1>
+        </div>
+    </div>
+    
+    <div class="info-box">
+        <p><strong>Report ID:</strong> {{ report_id }}</p>
+        <p><strong>Investor Name:</strong> {{ investor_name }}</p>
+        <p><strong>Report Period:</strong> {{ report_period }}</p>
+        <p><strong>Date Generated:</strong> {{ generated_date }}</p>
+    </div>
+
+    <h2>Commitment & Contributions</h2>
+    <table>
+        <tr><th>Total Committed Capital</th><td>{{ total_committed }}</td></tr>
+        <tr><th>Total Drawdown Called</th><td>{{ total_drawdown_called }}</td></tr>
+        <tr><th>Total Drawdown Received</th><td>{{ total_drawdown_received }}</td></tr>
+        <tr><th>Total Undrawn Capital</th><td>{{ total_undrawn }}</td></tr>
+    </table>
+
+    <h2>Performance Overview</h2>
+    <table>
+        <tr><th>Gross IRR</th><td>{{ gross_irr }}</td></tr>
+        <tr><th>Net IRR</th><td>{{ net_irr }}</td></tr>
+        <tr><th>NAV as of Date</th><td>{{ nav }}</td></tr>
+    </table>
+
+    <h2>Capital Movements</h2>
+    <table>
+        <tr><th>Capital Returned</th><td>{{ capital_returned }}</td></tr>
+        <tr><th>Balance Capital</th><td>{{ balance_capital }}</td></tr>
+        <tr><th>Total Amount Returned</th><td>{{ total_returned }}</td></tr>
+    </table>
+
+    <div class="footer">
+        <p>Thank you for your continued trust and partnership.</p>
+        <p>This report was generated on {{ generated_date }}.</p>
+        <p>For any queries, please contact your relationship manager.</p>
+    </div>
+</body>
+</html>
