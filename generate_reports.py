@@ -19,18 +19,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Get the directory containing the script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Load environment variables
 load_dotenv()
 
-# Use absolute paths with BASE_DIR
 OUTPUT_DIR = os.path.join(BASE_DIR, os.getenv('OUTPUT_DIR', 'generated_reports'))
 TEMPLATE_DIR = os.path.join(BASE_DIR, os.getenv('TEMPLATE_DIR', 'report_template'))
 DATA_FILE = os.path.join(BASE_DIR, os.getenv('DATA_FILE', 'investor_data.csv'))
 
-# Database Configuration
 DB_CONFIG = {
     'dbname': os.getenv('DB_NAME', 'my_investors_db'),
     'user': os.getenv('DB_USER', 'postgres'),
@@ -40,8 +36,6 @@ DB_CONFIG = {
 }
 
 def check_wkhtmltopdf():
-    """Check if wkhtmltopdf is installed"""
-    # The 'r' here is CRITICAL for Windows paths. Do not remove it.
     wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
     try:
         if os.path.exists(wkhtmltopdf_path):
@@ -135,7 +129,6 @@ class ReportGenerator:
         
         return data
 
-    # --- THIS IS THE FUNCTION THAT WAS MISSING ---
     def generate_report(self, investor_data, save_to_db=True):
         """Generate report for a single investor and save to database"""
         conn = None
@@ -190,7 +183,6 @@ class ReportGenerator:
                 logger.info(f"Saved report to database for {investor_data.get('investor_name', 'Unknown')}")
             
             logger.info(f"Generated report for {investor_data.get('investor_name', 'Unknown')}")
-            # This returns the 3 values your app.py file needs
             return investor_data_formatted['report_id'], html_content, pdf_bytes
             
         except Exception as e:
@@ -203,14 +195,11 @@ class ReportGenerator:
                 cur.close()
             if conn:
                 conn.close()
-# --------------------------------------------------
 
-# (The main() function for standalone testing remains the same)
 def main():
     try:
         generator = ReportGenerator()
         data_df = generator.load_data(DATA_FILE)
-        # ... (rest of main function) ...
     except Exception as e:
         logger.error(f"Critical error in main execution: {str(e)}")
         raise

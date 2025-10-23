@@ -1,9 +1,9 @@
 from flask import Flask, request, send_file, jsonify
 import os
-import io  # <-- Necessary import
-import logging  # <-- Necessary import
+import io 
+import logging
 from werkzeug.utils import secure_filename
-from generate_reports import ReportGenerator # <-- Imports the class from the other file
+from generate_reports import ReportGenerator
 import pandas as pd
 import tempfile
 from datetime import datetime
@@ -62,13 +62,10 @@ def generate_report_by_id():
 
         investor_data = dict(result)
 
-        # Creates the generator and calls the function
         generator = ReportGenerator()
         
-        # --- CORRECTLY UNPACKS THE 3 RETURN VALUES ---
         report_id, html_content, pdf_bytes = generator.generate_report(investor_data, save_to_db=True)
 
-        # --- SENDS BACK THE URLS FOR THE NEXT N8N NODE ---
         response = {
             'success': True,
             'message': f'Generated report for {investor_data["investor_name"]}',
@@ -90,7 +87,6 @@ def generate_report_by_id():
         if conn:
             conn.close()
 
-# --- THIS ROUTE LETS N8N DOWNLOAD THE PDF ---
 @app.route('/get-report-pdf/<int:investor_id>', methods=['GET'])
 def get_report_pdf(investor_id):
     conn = None
@@ -123,7 +119,6 @@ def get_report_pdf(investor_id):
         if conn:
             conn.close()
 
-# --- THIS ROUTE LETS YOU VIEW THE HTML IN A BROWSER ---
 @app.route('/get-report-html/<int:investor_id>', methods=['GET'])
 def get_report_html(investor_id):
     conn = None
@@ -148,8 +143,6 @@ def get_report_html(investor_id):
             cur.close()
         if conn:
             conn.close()
-
-# --- (Other routes like /generate-report from file upload are omitted for brevity) ---
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080, host='127.0.0.1')
