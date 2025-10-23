@@ -28,11 +28,11 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, os.getenv('TEMPLATE_DIR', 'report_template
 DATA_FILE = os.path.join(BASE_DIR, os.getenv('DATA_FILE', 'investor_data.csv'))
 
 DB_CONFIG = {
-    'dbname': os.getenv('DB_NAME', 'my_investors_db'),
-    'user': os.getenv('DB_USER', 'postgres'),
-    'password': os.getenv('DB_PASSWORD', 'your_new_strong_password'),
-    'host': os.getenv('DB_HOST', 'localhost'),
-    'port': os.getenv('DB_PORT', '5432')
+    'dbname': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT')
 }
 
 def check_wkhtmltopdf():

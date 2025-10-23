@@ -15,11 +15,11 @@ app = Flask(__name__)
 logger = logging.getLogger(__name__)
 
 DB_CONFIG = {
-    'dbname': 'my_investors_db',
-    'user': 'postgres',
-    'password': 'your_new_strong_password',
-    'host': 'localhost',
-    'port': '5432'
+    'dbname': os.getenv('DB_NAME'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'host': os.getenv('DB_HOST'),
+    'port': os.getenv('DB_PORT')
 }
 
 UPLOAD_FOLDER = 'uploads'
